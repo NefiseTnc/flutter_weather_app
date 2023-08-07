@@ -6,33 +6,34 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var deviceWidth = MediaQuery.of(context).size.width;
-    var deviceHeight = MediaQuery.of(context).size.height;
-    var deviceTopPadding = MediaQuery.of(context).padding.top;
-    var deviceBottomPadding = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: Container(
-        padding:
-            EdgeInsets.only(top: deviceTopPadding, bottom: deviceBottomPadding),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top,
+            bottom: (MediaQuery.of(context).padding.bottom) * .5),
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
           gradient: AppStyle.backgroundLineerGradient,
         ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeaderWidget(),
-            SizedBox(height: 50),
-            TitleWidget(),
-            SizedBox(height: 50),
-            WeatherValueWidget(),
-            SizedBox(height: 50),
-            WeatherDetailsWidget(),
-            TabTitleWidget(),
-            TabItemListWidget(),
-          ],
+        child: const SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderWidget(),
+              SizedBox(height: 50),
+              TitleWidget(),
+              SizedBox(height: 50),
+              WeatherValueWidget(),
+              SizedBox(height: 50),
+              WeatherDetailsWidget(),
+              SizedBox(height: 25),
+              WeatherListTitleWidget(),
+              SizedBox(height: 10),
+              WeatherListWidget(),
+            ],
+          ),
         ),
       ),
     );
@@ -224,20 +225,114 @@ class WeatherDetailsWidget extends StatelessWidget {
   }
 }
 
-class TabTitleWidget extends StatelessWidget {
-  const TabTitleWidget({super.key});
+class WeatherListTitleWidget extends StatelessWidget {
+  const WeatherListTitleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Today',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: AppStyle.textColor,
+                    fontFamily: AppStyle.fontFamilyInterBold),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Next 7 Days',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: const Color(0xFFD6996B),
+                        fontFamily: AppStyle.fontFamilyInterRegular),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Image.asset(
+                    'assets/icons/next_arrow_icon.png',
+                    width: 10,
+                    height: 10,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 5.0),
+          const Divider(
+            color: Color(0xFFD6996B),
+          )
+        ],
+      ),
+    );
   }
 }
 
-class TabItemListWidget extends StatelessWidget {
-  const TabItemListWidget({super.key});
+class WeatherListWidget extends StatelessWidget {
+  const WeatherListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(left: 12.0),
+      height: 120,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          _weatherListItem('assets/images/day_sleet.png', '13:00', '19'),
+          _weatherListItem('assets/images/cloudy.png', '13:00', '18'),
+          _weatherListItem('assets/images/day_clear.png', '14:00', '17'),
+          _weatherListItem('assets/images/fog.png', '15:00', '16'),
+          _weatherListItem('assets/images/mist.png', '16:00', '15'),
+          _weatherListItem('assets/images/overcast.png', '17:00', '14'),
+          _weatherListItem('assets/images/rain.png', '18:00', '12'),
+          _weatherListItem('assets/images/rain_thunder.png', '19:00', '10'),
+          _weatherListItem('assets/images/day_rain.png', '20:00', '9'),
+          _weatherListItem('assets/images/day_sleet.png', '21:00', '8'),
+        ],
+      ),
+    );
+  }
+
+  Widget _weatherListItem(String imageUrl, String hour, String degree) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
+      margin: const EdgeInsets.only(right: 10.0),
+      decoration: BoxDecoration(
+          color: Colors.white.withOpacity(.36),
+          borderRadius: const BorderRadius.all(Radius.circular(24))),
+      child: Column(
+        children: [
+          Text(
+            hour,
+            style: TextStyle(
+              fontFamily: AppStyle.fontFamilyInterRegular,
+              fontSize: 15,
+            ),
+          ),
+          Image.asset(
+            imageUrl,
+            width: 54,
+            height: 54,
+            fit: BoxFit.cover,
+          ),
+          Text(
+            '$degree °',
+            style: TextStyle(
+              fontFamily: AppStyle.fontFamilyInterBold,
+              fontSize: 17,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
