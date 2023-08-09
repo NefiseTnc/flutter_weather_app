@@ -7,8 +7,8 @@ import 'package:flutter_weather_app/views/home/widgets/weather_list_title_widget
 import 'package:flutter_weather_app/views/home/widgets/weather_list_widget.dart';
 import 'package:flutter_weather_app/views/home/widgets/weather_value_widget.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

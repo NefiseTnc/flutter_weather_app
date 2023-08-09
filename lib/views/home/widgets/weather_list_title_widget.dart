@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/style.dart';
+import 'package:flutter_weather_app/views/next_days_views/next_days_view.dart';
 
 class WeatherListTitleWidget extends StatelessWidget {
   const WeatherListTitleWidget({super.key});
@@ -21,24 +21,33 @@ class WeatherListTitleWidget extends StatelessWidget {
                     color: AppStyle.textColor,
                     fontFamily: AppStyle.fontFamilyInterBold),
               ),
-              Row(
-                children: [
-                  Text(
-                    'Next 7 Days',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: const Color(0xFFD6996B),
-                        fontFamily: AppStyle.fontFamilyInterRegular),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Image.asset(
-                    'assets/icons/next_arrow_icon.png',
-                    width: 10,
-                    height: 10,
-                  ),
-                ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NextDaysView(),
+                      ));
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      'Next 7 Days',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: const Color(0xFFD6996B),
+                          fontFamily: AppStyle.fontFamilyInterRegular),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Image.asset(
+                      'assets/icons/next_arrow_icon.png',
+                      width: 10,
+                      height: 10,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

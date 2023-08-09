@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/style.dart';
 
-class NextDaysWidget extends StatelessWidget {
-  const NextDaysWidget({super.key});
+class NextDaysView extends StatelessWidget {
+  const NextDaysView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,9 @@ class NextDaysWidget extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: Image.asset(
                         'assets/icons/back_arrow_icon.png',
                         width: 36,

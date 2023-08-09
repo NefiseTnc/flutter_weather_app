@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/style.dart';
-import 'package:flutter_weather_app/views/next_days_views/next_days_view.dart';
+import 'package:flutter_weather_app/views/home/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: AppStyle.fontFamilyInter,
       ),
-      home: const NextDaysWidget(),
+      home: const HomeView(),
     );
   }
 }
