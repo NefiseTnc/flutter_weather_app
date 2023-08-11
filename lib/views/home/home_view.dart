@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/services/weather_service.dart';
 import 'package:flutter_weather_app/style.dart';
 import 'package:flutter_weather_app/views/home/widgets/header_widget.dart';
 import 'package:flutter_weather_app/views/home/widgets/title_widget.dart';
@@ -12,6 +13,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WeatherService weatherService = WeatherService();
+    weatherService.fetchWeather(location: 'Izmir');
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(
